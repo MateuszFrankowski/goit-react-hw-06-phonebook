@@ -15,13 +15,12 @@ export const App = () => {
         alignItems: 'center',
         fontSize: 40,
         color: '#010101',
+        backgroundColor: ' whitesmoke',
       }}
     >
-      <h1>Phonebook</h1>
       <ContactForm />
-      {phoneBookContacts.length > 0 && (
+      {!!phoneBookContacts > 0 && (
         <div>
-          <h2>Contacts</h2>
           <Filter />
           <ContactsList />
         </div>

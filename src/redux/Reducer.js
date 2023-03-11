@@ -1,53 +1,26 @@
-// const [contacts, setContacts] = useState(
-//   () => JSON.parse(localStorage.getItem('phonebook-list')) || []
-// );
+import {
+  addContactAction,
+  deleteContactAction,
+  setNameFilterAction,
+} from './Actions';
+import { createReducer } from '@reduxjs/toolkit';
 
-// useEffect(() => {
-//   const phonebookListStringified = JSON.stringify(contacts);
+const contactsInitialState = [
+  { id: 1, name: 'mateusz', number: '83823023032' },
+  { id: 2, name: 'mateusze k', number: '83823023032' },
+];
+export const contactsReducer = createReducer(contactsInitialState, {
+  [addContactAction]: (state, action) => {
+    return [...state, action.payload];
+  },
 
-//   window.localStorage.setItem('phonebook-list', phonebookListStringified);
-// }, [contacts]);
-import { combineReducers } from 'redux';
-const contactsInitialState = {
-  contacts: [],
-};
-const tasksReducer = (state = contactsInitialState, action) => {
-  switch (action.type) {
-    case 'tasks/addTask': {
-      return {
-        ...state,
-        contacts: [...state.contacts, action.payload],
-      };
-    }
-    case 'tasks/deleteContact': {
-      return {
-        ...state,
-        contacts: state.contacts.filter(
-          contact => contact.id !== action.payload
-        ),
-      };
-    }
-
-    default:
-      return state;
-  }
-};
-const filterInitialState = {
-  filter: '',
-};
-const filterReducer = (state = filterInitialState, action) => {
-  switch (action.type) {
-    case 'tasks/setNameFilter': {
-      return {
-        ...state,
-        filter: action.payload,
-      };
-    }
-    default:
-      return state;
-  }
-};
-export const rootReducer = combineReducers({
-  tasks: tasksReducer,
-  filter: filterReducer,
+  [deleteContactAction]: (state, action) => {
+    return state.filter(contact => contact.id !== action.payload);
+  },
+});
+const filterInitialState = '';
+export const filterReducer = createReducer(filterInitialState, {
+  [setNameFilterAction]: action => {
+    return action.payload;
+  },
 });

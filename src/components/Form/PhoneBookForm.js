@@ -1,8 +1,7 @@
-import PropTypes from 'prop-types';
 import css from './PhoneBookForm.module.css';
-import { addContact } from 'redux/Actions';
-import { useDispatch } from 'react-redux';
-import { useSelector } from 'react-redux';
+import { addContactAction } from 'redux/Actions';
+import { useDispatch, useSelector } from 'react-redux';
+
 import { nanoid } from 'nanoid';
 import React from 'react';
 export const ContactForm = () => {
@@ -13,16 +12,19 @@ export const ContactForm = () => {
   const handleSubmit = evt => {
     evt.preventDefault();
     const form = evt.target;
-    const { name, number } = form.value;
-    if (phoneBookContacts.find(element => element.name === name)) {
-      return alert(name + ' is already in contacts');
+    const { name, number } = form.elements;
+    if (phoneBookContacts) {
+      if (phoneBookContacts.find(element => element.name === name.value)) {
+        return alert(name.value + ' is already in contacts');
+      }
     }
-    dispatch(addContact(name, number));
+    dispatch(addContactAction(name.value, number.value));
     form.reset();
   };
 
   return (
     <>
+      <h2>Phonebook</h2>
       <form onSubmit={handleSubmit} className={css.form} style={{}}>
         <label htmlFor={nameInputId}>Name</label>
         <input

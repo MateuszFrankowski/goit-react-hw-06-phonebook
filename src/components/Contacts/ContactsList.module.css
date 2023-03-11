@@ -4,9 +4,13 @@
   width: 100%;
   align-items: center;
   background-color: whitesmoke;
-  box-shadow: 5px 5px 5px gray;
   border-radius: 4px;
-  padding: 5px;
+  padding: 20px;
+  margin: auto;
+}
+.contacts-title {
+  text-align: center;
+  margin: auto;
 }
 .item {
   width: 100%;
