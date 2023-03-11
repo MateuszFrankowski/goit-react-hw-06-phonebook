@@ -1,5 +1,6 @@
 import css from './PhoneBookForm.module.css';
-import { addContactAction } from 'redux/Actions';
+//import { addContactAction } from 'redux/Actions';
+import { addContactAction } from 'redux/ContactsSlice';
 import { useDispatch, useSelector } from 'react-redux';
 
 import { nanoid } from 'nanoid';
